@@ -1,16 +1,16 @@
 # ----------------------------------------
 # Common Cluster settings
 
-$nest_dc_name = "Datacenter"
+$nest_dc_name = "Datacenter-81"
 $nest_cluster_name = "lab-cluster-81"
-$vm_num = 4
-$hv_ip_4oct_start = 111 # 4th Octet for ESXi-vmk0-IP
+$vm_num = 1
+$hv_ip_4oct_start = 81 # 4th Octet for ESXi-vmk0-IP
 
 # ----------------------------------------
 # Nested ESXi VM settings
 
 # Nested ESXi VM Template
-$template_vm_name = "esxi80-template-01"
+$template_vm_name = "esxi70u3c-template-01"
 $linked_clone = $false
 
 # Nested ESXi VM Name
@@ -18,7 +18,7 @@ $vm_name_prefix = "vm-lab-esxi-"
 
 # Nested ESXi VM Spec
 $esxi_vcpu = 2
-$esxi_memory_gb = 12
+$esxi_memory_gb = 16
 
 # ----------------------------------------
 # Nested ESXi Hypervisor settings
@@ -31,11 +31,17 @@ $hv_pass = "VMware1!"
 $nest_hv_hostname_prefix = "lab-esxi-"
 $domain = "go-lab.jp"
 
+# Nested ESXi Hostname Fixed List
+$vc_hv_name_use_fqdn = $false # $true or $false
+$nest_hv_hostname_list = 1..$vm_num | % {
+    $nest_hv_hostname_prefix + ($hv_ip_4oct_start + $_ - 1).ToString("00") + "." + $domain
+}
+
 # Nested ESXi Network setting
-$hv_ip_prefix_vmk0 = "192.168.10." # $hv_ip_prefix_vmk0 + $hv_ip_4oct_start => 192.168.10.111
+$hv_ip_prefix_vmk0 = "192.168.80." # $hv_ip_prefix_vmk0 + $hv_ip_4oct_start => 192.168.10.111
 $hv_vmk0_subnetmask = "255.255.255.0" # /24
-$nest_hv_vmk0_vlan = 10 # Default VLAN ID: 0
-$hv_gw = "192.168.10.1"
+$nest_hv_vmk0_vlan = 80 # Default VLAN ID: 0
+$hv_gw = "192.168.80.1"
 
 # DNS / NTP Servers
 $dns_servers = "192.168.1.101","192.168.1.102"
@@ -44,11 +50,11 @@ $ntp_servers = "192.168.1.101","192.168.1.102"
 # ----------------------------------------
 # Network additional settings (Multi-vmk)
 
-$add_vmk1 = $true # $true or $false
-$add_vmk2 = $true # $true or $false
+$add_vmk1 = $false # $true or $false
+$add_vmk2 = $false # $true or $false
 
-$vmotion_vmk_port = "vmk1"
-$vsan_vmk_port = "vmk2"
+$vmotion_vmk_port = "vmk0"
+$vsan_vmk_port = "vmk0"
 $witness_vmk_port = "vmk0" # vSAN WTS only
 
 $vmk1_vss = "vSwitch0"
@@ -66,7 +72,7 @@ $vmk2_subnetmask = "255.255.255.0" # /24
 # ----------------------------------------
 # Network additional settings (Multi-pNIC)
 
-$multi_vmnic = 4 # add vmnic1 .. vmnic3
+$multi_vmnic = 2 # add vmnic1 .. vmnic3
 
 # ----------------------------------------
 # Storage Settings (vSAN)
