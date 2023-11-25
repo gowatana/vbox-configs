@@ -2,15 +2,15 @@
 # Common Cluster settings
 
 $nest_dc_name = "lab-dc-31"
-$nest_cluster_name = "lab-cluster-31"
-$vm_num = 4
-$hv_ip_4oct_start = 131 # 4th Octet for ESXi-vmk0-IP
+$nest_cluster_name = "lab-cluster-30"
+$vm_num = 10
+$hv_ip_4oct_start = 130 # 4th Octet for ESXi-vmk0-IP
 
 # ----------------------------------------
 # Nested ESXi VM settings
 
 # Nested ESXi VM Template
-$template_vm_name = "esxi80-template-01"
+$template_vm_name = "esxi80u2-template-01"
 $linked_clone = $false
 
 # Nested ESXi VM Name
@@ -31,6 +31,12 @@ $hv_pass = "VMware1!"
 $nest_hv_hostname_prefix = "lab-esxi-"
 $domain = "go-lab.jp"
 
+# Nested ESXi Hostname Fixed List
+$vc_hv_name_use_fqdn = $true # $true or $false
+$nest_hv_hostname_list = 1..$vm_num | % {
+    $nest_hv_hostname_prefix + ($hv_ip_4oct_start + $_ - 1).ToString("00") + "." + $domain
+}
+
 # Nested ESXi Network setting
 $hv_ip_prefix_vmk0 = "192.168.10." # $hv_ip_prefix_vmk0 + $hv_ip_4oct_start => 192.168.10.111
 $hv_vmk0_subnetmask = "255.255.255.0" # /24
@@ -47,8 +53,8 @@ $ntp_servers = "192.168.1.101","192.168.1.102"
 $add_vmk1 = $false # $true or $false
 $add_vmk2 = $false # $true or $false
 
-$vmotion_vmk_port = "vmk1"
-$vsan_vmk_port = "vmk2"
+$vmotion_vmk_port = "vmk0"
+$vsan_vmk_port = "vmk0"
 $witness_vmk_port = "vmk0" # vSAN WTS only
 
 $vmk1_vss = "vSwitch0"
@@ -79,6 +85,6 @@ $vsan_dg_type = "AllFlash" # Hybrid or AllFlash
 
 # vSAN Disk settings
 $vsan_cache_disk_size_gb = 50
-$vsan_capacity_disk_size_gb = 200
+$vsan_capacity_disk_size_gb = 50
 $vsan_capacity_disk_count = 1
 $vsan_dg_count = 1 # Multi-Diskgroup setup

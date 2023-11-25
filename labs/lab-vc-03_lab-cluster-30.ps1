@@ -22,7 +22,7 @@ $config_base = "./"
 $base_vc_config = "$config_base/01_vcenter-login/infra-vc-01.ps1"
 
 # Base-vSphere environment config
-$base_env_config = "$config_base/02_base-vsphere/infra-dc-01_infra-cluster-01.ps1"
+$base_env_config = "$config_base/02_base-vsphere/infra-dc-01_infra-cluster-03.ps1"
 
 # ----------------------------------------
 # Nest Environment configs
@@ -31,7 +31,7 @@ $base_env_config = "$config_base/02_base-vsphere/infra-dc-01_infra-cluster-01.ps
 $nest_vc_config = "$config_base/01_vcenter-login/lab-vc-03.ps1"
 
 # Nest-vSphere environment config
-$nest_env_config = "$config_base/03_nest-vsphere/lab-cluster-31.ps1"
+$nest_env_config = "$config_base/03_nest-vsphere/lab-cluster-30.ps1"
 
 # ----------------------------------------
 # Additional configs
