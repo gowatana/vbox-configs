@@ -3,7 +3,7 @@
 
 $nest_dc_name = "lab-dc-01"
 $nest_cluster_name = "lab-cluster-02"
-$vm_num = 2
+$vm_num = 3
 $hv_ip_4oct_start = 114 # 4th Octet for ESXi-vmk0-IP
 
 # ----------------------------------------
@@ -80,11 +80,16 @@ $multi_vmnic = 4 # add vmnic1 .. vmnic3
 # vSAN Datastore Name
 $vsan_ds_name = "vsanDatastore-02"
 
-# vSAN Disk Group type
-$vsan_dg_type = "Hybrid" # Hybrid or AllFlash
+# vSAN Architecture
+$vsan_arch = "ESA" # OSA or ESA
 
-# vSAN Disk settings
-$vsan_cache_disk_size_gb = 10
-$vsan_capacity_disk_size_gb = 200
-$vsan_capacity_disk_count = 1
-$vsan_dg_count = 1 # Multi-Diskgroup setup
+# vSAN OSA Disk settings
+$vsan_dg_type = "AllFlash"        # OSA only, Hybrid or AllFlash
+$vsan_cache_disk_size_gb = 20     # OSA only
+$vsan_capacity_disk_size_gb = 200 # OSA only
+$vsan_capacity_disk_count = 1     # OSA only
+$vsan_dg_count = 1                # OSA only, Multi-Diskgroup setup
+
+# vSAN ESA Disk settings
+$nvme_vmdk_size_gb = 100 # ESA only
+$nvme_vmdk_count = 4     # ESA only

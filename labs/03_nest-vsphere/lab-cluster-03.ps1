@@ -4,13 +4,13 @@
 $nest_dc_name = "lab-dc-01"
 $nest_cluster_name = "lab-cluster-03"
 $vm_num = 2
-$hv_ip_4oct_start = 116 # 4th Octet for ESXi-vmk0-IP
+$hv_ip_4oct_start = 117 # 4th Octet for ESXi-vmk0-IP
 
 # ----------------------------------------
 # Nested ESXi VM settings
 
 # Nested ESXi VM Template
-$template_vm_name = "esxi70u3c-template-01"
+$template_vm_name = "esxi80u2-template-01"
 $linked_clone = $false
 
 # Nested ESXi VM Name
@@ -31,6 +31,12 @@ $hv_pass = "VMware1!"
 $nest_hv_hostname_prefix = "lab-esxi-"
 $domain = "go-lab.jp"
 
+# Nested ESXi Hostname Fixed List
+$vc_hv_name_use_fqdn = $true # $true or $false
+$nest_hv_hostname_list = 1..$vm_num | % {
+    $nest_hv_hostname_prefix + ($hv_ip_4oct_start + $_ - 1).ToString("00") + "." + $domain
+}
+
 # Nested ESXi Network setting
 $hv_ip_prefix_vmk0 = "192.168.10." # $hv_ip_prefix_vmk0 + $hv_ip_4oct_start => 192.168.10.111
 $hv_vmk0_subnetmask = "255.255.255.0" # /24
@@ -47,8 +53,8 @@ $ntp_servers = "192.168.1.101","192.168.1.102"
 $add_vmk1 = $false # $true or $false
 $add_vmk2 = $false # $true or $false
 
-$vmotion_vmk_port = "vmk1"
-$vsan_vmk_port = "vmk2"
+$vmotion_vmk_port = "vmk0"
+$vsan_vmk_port = "vmk0"
 $witness_vmk_port = "vmk0" # vSAN WTS only
 
 $vmk1_vss = "vSwitch0"
@@ -74,11 +80,16 @@ $multi_vmnic = 4 # add vmnic1 .. vmnic3
 # vSAN Datastore Name
 $vsan_ds_name = "vsanDatastore-03"
 
-# vSAN Disk Group type
-$vsan_dg_type = "Hybrid" # Hybrid or AllFlash
+# vSAN Architecture
+$vsan_arch = "ESA" # OSA or ESA
 
-# vSAN Disk settings
-$vsan_cache_disk_size_gb = 10
-$vsan_capacity_disk_size_gb = 200
-$vsan_capacity_disk_count = 1
-$vsan_dg_count = 1 # Multi-Diskgroup setup
+# vSAN OSA Disk settings
+$vsan_dg_type = "Hybrid"          # OSA only, Hybrid or AllFlash
+$vsan_cache_disk_size_gb = 20     # OSA only
+$vsan_capacity_disk_size_gb = 200 # OSA only
+$vsan_capacity_disk_count = 1     # OSA only
+$vsan_dg_count = 1                # OSA only, Multi-Diskgroup setup
+
+# vSAN ESA Disk settings
+$nvme_vmdk_size_gb = 200 # ESA only
+$nvme_vmdk_count = 2     # ESA only

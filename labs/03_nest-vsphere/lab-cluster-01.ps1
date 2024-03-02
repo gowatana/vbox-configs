@@ -80,11 +80,16 @@ $multi_vmnic = 4 # add vmnic1 .. vmnic3
 # vSAN Datastore Name
 $vsan_ds_name = "vsanDatastore-01"
 
-# vSAN Disk Group type
-$vsan_dg_type = "Hybrid" # Hybrid or AllFlash
+# vSAN Architecture
+$vsan_arch = "OSA" # OSA or ESA
 
-# vSAN Disk settings
-$vsan_cache_disk_size_gb = 100
-$vsan_capacity_disk_size_gb = 300
-$vsan_capacity_disk_count = 1
-$vsan_dg_count = 1 # Multi-Diskgroup setup
+# vSAN OSA Disk settings
+$vsan_dg_type = "Hybrid"          # OSA only, Hybrid or AllFlash
+$vsan_cache_disk_size_gb = 20     # OSA only
+$vsan_capacity_disk_size_gb = 200 # OSA only
+$vsan_capacity_disk_count = 1     # OSA only
+$vsan_dg_count = 1                # OSA only, Multi-Diskgroup setup
+
+# vSAN ESA Disk settings
+$nvme_vmdk_size_gb = 200 # ESA only
+$nvme_vmdk_count = 2     # ESA only
