@@ -92,4 +92,4 @@ $vsan_dg_count = 1                # OSA only, Multi-Diskgroup setup
 
 # vSAN ESA Disk settings
 $nvme_vmdk_size_gb = 100 # ESA only
-$nvme_vmdk_count = 4     # ESA only
+$nvme_vmdk_count = 1     # ESA only
