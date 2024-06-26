@@ -2,9 +2,9 @@
 # Common Cluster settings
 
 $nest_dc_name = "lab-dc-31"
-$nest_cluster_name = "lab-cluster-41"
-$vm_num = 1
-$hv_ip_4oct_start = 141 # 4th Octet for ESXi-vmk0-IP
+$nest_cluster_name = "lab-cluster-31"
+$vm_num = 3
+$hv_ip_4oct_start = 131 # 4th Octet for ESXi-vmk0-IP
 
 # ----------------------------------------
 # Nested ESXi VM settings
@@ -72,7 +72,7 @@ $vmk2_subnetmask = "255.255.255.0" # /24
 # ----------------------------------------
 # Network additional settings (Multi-pNIC)
 
-$multi_vmnic = 1 # add vmnic1 .. vmnic3
+$multi_vmnic = 4 # add vmnic1 .. vmnic3
 
 # ----------------------------------------
 # Storage Settings (vSAN)
@@ -81,10 +81,10 @@ $multi_vmnic = 1 # add vmnic1 .. vmnic3
 $vsan_ds_name = "vsanDatastore-31"
 
 # vSAN Disk Group type
-$vsan_dg_type = "Hybrid" # Hybrid or AllFlash
+$vsan_dg_type = "AllFlash" # Hybrid or AllFlash
 
 # vSAN Disk settings
-$vsan_cache_disk_size_gb = 100
-$vsan_capacity_disk_size_gb = 500
+$vsan_cache_disk_size_gb = 50
+$vsan_capacity_disk_size_gb = 50
 $vsan_capacity_disk_count = 1
 $vsan_dg_count = 1 # Multi-Diskgroup setup
