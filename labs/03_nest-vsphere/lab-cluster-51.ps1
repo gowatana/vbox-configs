@@ -1,10 +1,10 @@
 # ----------------------------------------
 # Common Cluster settings
 
-$nest_dc_name = "lab-dc-41"
-$nest_cluster_name = "lab-cluster-41"
+$nest_dc_name = "lab-dc-51"
+$nest_cluster_name = "lab-cluster-51"
 $vm_num = 3
-$hv_ip_4oct_start = 141 # 4th Octet for ESXi-vmk0-IP
+$hv_ip_4oct_start = 151 # 4th Octet for ESXi-vmk0-IP
 
 # ----------------------------------------
 # Nested ESXi VM settings
@@ -17,8 +17,8 @@ $linked_clone = $false
 $vm_name_prefix = "vm-lab-esxi-"
 
 # Nested ESXi VM Spec
-$esxi_vcpu = 4
-$esxi_memory_gb = 32
+$esxi_vcpu = 2
+$esxi_memory_gb = 16
 
 # ----------------------------------------
 # Nested ESXi Hypervisor settings
@@ -50,11 +50,11 @@ $ntp_servers = "192.168.1.101","192.168.1.102"
 # ----------------------------------------
 # Network additional settings (Multi-vmk)
 
-$add_vmk1 = $false # $true or $false
-$add_vmk2 = $false # $true or $false
+$add_vmk1 = $true # $true or $false
+$add_vmk2 = $true # $true or $false
 
-$vmotion_vmk_port = "vmk0"
-$vsan_vmk_port = "vmk0"
+$vmotion_vmk_port = "vmk1"
+$vsan_vmk_port = "vmk2"
 $witness_vmk_port = "vmk0" # vSAN WTS only
 
 $vmk1_vss = "vSwitch0"
@@ -72,19 +72,24 @@ $vmk2_subnetmask = "255.255.255.0" # /24
 # ----------------------------------------
 # Network additional settings (Multi-pNIC)
 
-$multi_vmnic = 1 # add vmnic1 .. vmnic3
+$multi_vmnic = 2 # add vmnic1 .. vmnic3
 
 # ----------------------------------------
 # Storage Settings (vSAN)
 
 # vSAN Datastore Name
-$vsan_ds_name = "vsanDatastore-31"
+$vsan_ds_name = "vsanDatastore-01"
 
-# vSAN Disk Group type
-$vsan_dg_type = "Hybrid" # Hybrid or AllFlash
+# vSAN Architecture
+$vsan_arch = "ESA" # OSA or ESA
 
-# vSAN Disk settings
-$vsan_cache_disk_size_gb = 100
-$vsan_capacity_disk_size_gb = 500
-$vsan_capacity_disk_count = 1
-$vsan_dg_count = 1 # Multi-Diskgroup setup
+# vSAN OSA Disk settings
+$vsan_dg_type = "Hybrid"          # OSA only, Hybrid or AllFlash
+$vsan_cache_disk_size_gb = 20     # OSA only
+$vsan_capacity_disk_size_gb = 200 # OSA only
+$vsan_capacity_disk_count = 1     # OSA only
+$vsan_dg_count = 1                # OSA only, Multi-Diskgroup setup
+
+# vSAN ESA Disk settings
+$nvme_vmdk_size_gb = 200 # ESA only
+$nvme_vmdk_count = 2     # ESA only
