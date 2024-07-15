@@ -10,7 +10,7 @@ $hv_ip_4oct_start = 131 # 4th Octet for ESXi-vmk0-IP
 # Nested ESXi VM settings
 
 # Nested ESXi VM Template
-$template_vm_name = "esxi80u2b-template-01"
+$template_vm_name = "esxi80u3-template-01"
 $linked_clone = $false
 
 # Nested ESXi VM Name

@@ -3,14 +3,14 @@
 
 $nest_dc_name = "lab-dc-31"
 $nest_cluster_name = "lab-cluster-30"
-$vm_num = 10
+$vm_num = 1
 $hv_ip_4oct_start = 130 # 4th Octet for ESXi-vmk0-IP
 
 # ----------------------------------------
 # Nested ESXi VM settings
 
 # Nested ESXi VM Template
-$template_vm_name = "esxi80u2b-template-01"
+$template_vm_name = "esxi80u3-template-01"
 $linked_clone = $false
 
 # Nested ESXi VM Name
@@ -78,13 +78,18 @@ $multi_vmnic = 4 # add vmnic1 .. vmnic3
 # Storage Settings (vSAN)
 
 # vSAN Datastore Name
-$vsan_ds_name = "vsanDatastore-31"
+$vsan_ds_name = "vsanDatastore-30"
 
-# vSAN Disk Group type
-$vsan_dg_type = "AllFlash" # Hybrid or AllFlash
+# vSAN Architecture
+$vsan_arch = "ESA" # OSA or ESA
 
-# vSAN Disk settings
-$vsan_cache_disk_size_gb = 50
-$vsan_capacity_disk_size_gb = 50
-$vsan_capacity_disk_count = 1
-$vsan_dg_count = 1 # Multi-Diskgroup setup
+# vSAN OSA Disk settings
+$vsan_dg_type = "Hybrid"          # OSA only, Hybrid or AllFlash
+$vsan_cache_disk_size_gb = 50     # OSA only
+$vsan_capacity_disk_size_gb = 50 # OSA only
+$vsan_capacity_disk_count = 1     # OSA only
+$vsan_dg_count = 1                # OSA only, Multi-Diskgroup setup
+
+# vSAN ESA Disk settings
+$nvme_vmdk_size_gb = 400 # ESA only
+$nvme_vmdk_count = 1     # ESA only
